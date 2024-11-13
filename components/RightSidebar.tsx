@@ -7,13 +7,13 @@ import Category from "./Category"
 
 const RightSidebar = ({ user, transactions, banks }: RightSidebarProps) => {
   // const categories: CategoryCount[] = countTransactionCategories(transactions)
-  const firstLetter = user?.name ? user?.name[0] : ''
+  const firstLetter = user?.firstName ? user?.lastName[0] : ""
 
   const categories: CategoryCount[] = [
-    { name: 'Food and Drink', count: 21 , totalCount: 20 },
-    { name: 'Entertainment', count: 10, totalCount: 20 },
-    { name: 'Travel', count: 10, totalCount: 20 },
-  ];
+    { name: "Food and Drink", count: 21, totalCount: 20 },
+    { name: "Entertainment", count: 10, totalCount: 20 },
+    { name: "Travel", count: 10, totalCount: 20 },
+  ]
 
   return (
     <aside className="right-sidebar">
@@ -27,9 +27,7 @@ const RightSidebar = ({ user, transactions, banks }: RightSidebarProps) => {
           </div>
 
           <div className="profile-details">
-            <h1 className="profile-name">
-              {user?.name}
-            </h1>
+            <h1 className="profile-name">{user?.firstName}</h1>
             <p className="profile-email">{user?.email}</p>
           </div>
         </div>
@@ -50,7 +48,7 @@ const RightSidebar = ({ user, transactions, banks }: RightSidebarProps) => {
               <BankCard
                 key={banks[0].$id}
                 account={banks[0]}
-                userName={`${user?.name}`}
+                userName={`${user?.firstName} ${user?.lastName}`}
                 showBalance={false}
               />
             </div>
@@ -59,14 +57,16 @@ const RightSidebar = ({ user, transactions, banks }: RightSidebarProps) => {
                 <BankCard
                   key={banks[1].$id}
                   account={banks[1]}
-                  userName={`${user?.name}`}
+                  userName={`${user?.firstName} ${user?.lastName}`}
                   showBalance={false}
                 />
               </div>
             )}
           </div>
         ) : (
-            <div className="border border-gray-300 rounded-md  text-center text-gray-400  p-10">No Bank Info Available</div>
+          <div className="border border-gray-300 rounded-md  text-center text-gray-400  p-10">
+            No Bank Info Available
+          </div>
         )}
 
         <div className="mt-10 flex flex-1 flex-col gap-6">
@@ -74,7 +74,11 @@ const RightSidebar = ({ user, transactions, banks }: RightSidebarProps) => {
 
           <div className="space-y-5">
             {categories.map((category, index) => (
-              <Category key={category?.name} category={category} index={index} />
+              <Category
+                key={category?.name}
+                category={category}
+                index={index}
+              />
             ))}
           </div>
         </div>
